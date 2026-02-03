@@ -1,0 +1,31 @@
+{
+  "name": "elite-tax-finance-website",
+  "version": "1.0.0",
+  "description": "Professional website for Elite Tax & Finance - tax and financial services",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx live-server --port=3000 --open=/index.html",
+    "dev": "npx live-server --port=3000 --open=/index.html",
+    "build": "echo 'Static website - no build process needed'",
+    "serve": "npx http-server . -p 8080"
+  },
+  "keywords": [
+    "tax",
+    "finance",
+    "accounting",
+    "business",
+    "website"
+  ],
+  "author": "Elite Tax & Finance",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "live-server": "^1.2.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/elite-tax-finance-website.git"
+  },
+  "homepage": "https://your-username.github.io/elite-tax-finance-website"
+}
+

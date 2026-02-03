@@ -1,0 +1,123 @@
+{
+  "client_id": "CLIENT_001",
+  "client_name": "John Smith",
+  "complexity_tier": "Medium",
+  "document_history": {
+    "W-2": {
+      "document_type": "W-2",
+      "years": {},
+      "is_required": true,
+      "category": "standard"
+    },
+    "1099-INT": {
+      "document_type": "1099-INT",
+      "years": {
+        "2024": {
+          "status": "uploaded",
+          "filename": "TAX - 1099-INT for Member# 490940 - 12_31_2023.pdf",
+          "upload_date": "2025-09-07T22:12:36.866985",
+          "processed": true
+        }
+      },
+      "is_required": true,
+      "category": "standard"
+    },
+    "1099-DIV": {
+      "document_type": "1099-DIV",
+      "years": {},
+      "is_required": true,
+      "category": "standard"
+    },
+    "1099-B": {
+      "document_type": "1099-B",
+      "years": {
+        "2024": {
+          "status": "uploaded",
+          "filename": "Robinhood_1099.pdf",
+          "upload_date": "2025-09-07T22:12:36.865181",
+          "processed": true
+        }
+      },
+      "is_required": true,
+      "category": "standard"
+    },
+    "1099-R": {
+      "document_type": "1099-R",
+      "years": {},
+      "is_required": true,
+      "category": "standard"
+    },
+    "1098-T": {
+      "document_type": "1098-T",
+      "years": {},
+      "is_required": true,
+      "category": "standard"
+    },
+    "1098-E": {
+      "document_type": "1098-E",
+      "years": {},
+      "is_required": true,
+      "category": "standard"
+    },
+    "Mortgage Statement": {
+      "document_type": "Mortgage Statement",
+      "years": {
+        "2024": {
+          "status": "uploaded",
+          "filename": "cap1_1099_int.pdf",
+          "upload_date": "2025-09-07T22:12:36.865665",
+          "processed": true
+        }
+      },
+      "is_required": true,
+      "category": "standard"
+    },
+    "Property Tax": {
+      "document_type": "Property Tax",
+      "years": {
+        "2024": {
+          "status": "uploaded",
+          "filename": "acorns.pdf",
+          "upload_date": "2025-09-07T22:11:40.950739",
+          "processed": true
+        }
+      },
+      "is_required": true,
+      "category": "standard"
+    },
+    "Charitable Donations": {
+      "document_type": "Charitable Donations",
+      "years": {
+        "2024": {
+          "status": "uploaded",
+          "filename": "acorns.pdf",
+          "upload_date": "2025-09-07T22:12:36.864189",
+          "processed": true
+        }
+      },
+      "is_required": true,
+      "category": "standard"
+    },
+    "Investment Summary": {
+      "document_type": "Investment Summary",
+      "years": {},
+      "is_required": true,
+      "category": "standard"
+    },
+    "Unknown Document": {
+      "document_type": "Unknown Document",
+      "years": {
+        "2024": {
+          "status": "uploaded",
+          "filename": "acorns.pdf",
+          "upload_date": "2025-09-07T22:12:16.508248",
+          "processed": true
+        }
+      },
+      "is_required": false,
+      "category": "custom"
+    }
+  },
+  "last_updated": "2025-09-07T22:12:36.866989",
+  "tax_year": 2024
+}

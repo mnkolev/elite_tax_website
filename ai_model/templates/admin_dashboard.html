@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Elite Tax & Finance</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .tier-easy { border-left: 4px solid #28a745; }
+        .tier-medium { border-left: 4px solid #ffc107; }
+        .tier-hard { border-left: 4px solid #dc3545; }
+        .status-processing { color: #ffc107; }
+        .status-ready { color: #28a745; }
+        .status-uploaded { color: #17a2b8; }
+    </style>
+</head>
+<body>
+    <div class="container-fluid mt-4">
+        <h1 class="mb-4">
+            <i class="fas fa-tachometer-alt me-2"></i>
+            Elite Tax & Finance - Admin Dashboard
+        </h1>
+        
+        <!-- Summary Cards -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="card tier-easy">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="fas fa-check-circle me-2"></i>Easy Tier
+                        </h5>
+                        <h3 class="text-success">{{ clients.values() | selectattr('complexity_tier', 'equalto', 'Easy') | list | length }}</h3>
+                        <p class="text-muted">90% Automated</p>
+                        <small class="text-muted">1-2 day turnaround</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card tier-medium">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="fas fa-exclamation-triangle me-2"></i>Medium Tier
+                        </h5>
+                        <h3 class="text-warning">{{ clients.values() | selectattr('complexity_tier', 'equalto', 'Medium') | list | length }}</h3>
+                        <p class="text-muted">70% Automated</p>
+                        <small class="text-muted">3-5 day turnaround</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card tier-hard">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="fas fa-exclamation-circle me-2"></i>Hard Tier
+                        </h5>
+                        <h3 class="text-danger">{{ clients.values() | selectattr('complexity_tier', 'equalto', 'Hard') | list | length }}</h3>
+                        <p class="text-muted">30% Automated</p>
+                        <small class="text-muted">7-14 day turnaround</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="fas fa-users me-2"></i>Total Clients
+                        </h5>
+                        <h3 class="text-primary">{{ clients | length }}</h3>
+                        <p class="text-muted">Active Returns</p>
+                        <small class="text-muted">Tax Year 2024</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Status Overview -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-chart-pie me-2"></i>Status Overview
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-2 text-center">
+                                <div class="border rounded p-3">
+                                    <h4 class="text-success">{{ clients.values() | selectattr('status', 'equalto', 'Ready for Review') | list | length }}</h4>
+                                    <small class="text-muted">Ready for Review</small>
+                                </div>
+                            </div>
+                            <div class="col-md-2 text-center">
+                                <div class="border rounded p-3">
+                                    <h4 class="text-info">{{ clients.values() | selectattr('status', 'equalto', 'Processing') | list | length }}</h4>
+                                    <small class="text-muted">Processing</small>
+                                </div>
+                            </div>
+                            <div class="col-md-2 text-center">
+                                <div class="border rounded p-3">
+                                    <h4 class="text-warning">{{ clients.values() | selectattr('status', 'equalto', 'CPA Review') | list | length }}</h4>
+                                    <small class="text-muted">CPA Review</small>
+                                </div>
+                            </div>
+                            <div class="col-md-2 text-center">
+                                <div class="border rounded p-3">
+                                    <h4 class="text-primary">{{ clients.values() | selectattr('status', 'equalto', 'Documents Uploaded') | list | length }}</h4>
+                                    <small class="text-muted">Documents Uploaded</small>
+                                </div>
+                            </div>
+                            <div class="col-md-2 text-center">
+                                <div class="border rounded p-3">
+                                    <h4 class="text-secondary">{{ clients.values() | selectattr('status', 'equalto', 'Initial Review') | list | length }}</h4>
+                                    <small class="text-muted">Initial Review</small>
+                                </div>
+                            </div>
+                            <div class="col-md-2 text-center">
+                                <div class="border rounded p-3">
+                                    <h4 class="text-dark">{{ clients.values() | selectattr('status', 'equalto', 'Under Review') | list | length }}</h4>
+                                    <small class="text-muted">Under Review</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Clients by Tier -->
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card tier-easy">
+                    <div class="card-header">
+                        <h5><i class="fas fa-check-circle me-2"></i>Easy Tier Clients</h5>
+                    </div>
+                    <div class="card-body">
+                        {% for client_id, client in clients.items() %}
+                            {% if client.complexity_tier == 'Easy' %}
+                            <div class="d-flex justify-content-between align-items-center mb-3 p-3 bg-light rounded">
+                                <div>
+                                    <strong>{{ client.name }}</strong><br>
+                                    <small class="text-muted">{{ client.email }}</small><br>
+                                    <small class="text-muted">Uploaded: {{ client.upload_date }}</small>
+                                </div>
+                                <div class="text-end">
+                                    <span class="badge bg-success mb-1">{{ client.status }}</span><br>
+                                    <small class="text-muted">{{ client.estimated_completion }}</small><br>
+                                    <a href="/client/{{ client_id }}" class="btn btn-sm btn-outline-primary mt-1">View</a>
+                                </div>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card tier-medium">
+                    <div class="card-header">
+                        <h5><i class="fas fa-exclamation-triangle me-2"></i>Medium Tier Clients</h5>
+                    </div>
+                    <div class="card-body">
+                        {% for client_id, client in clients.items() %}
+                            {% if client.complexity_tier == 'Medium' %}
+                            <div class="d-flex justify-content-between align-items-center mb-3 p-3 bg-light rounded">
+                                <div>
+                                    <strong>{{ client.name }}</strong><br>
+                                    <small class="text-muted">{{ client.email }}</small><br>
+                                    <small class="text-muted">Uploaded: {{ client.upload_date }}</small>
+                                </div>
+                                <div class="text-end">
+                                    <span class="badge bg-warning mb-1">{{ client.status }}</span><br>
+                                    <small class="text-muted">{{ client.estimated_completion }}</small><br>
+                                    <a href="/client/{{ client_id }}" class="btn btn-sm btn-outline-primary mt-1">View</a>
+                                </div>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card tier-hard">
+                    <div class="card-header">
+                        <h5><i class="fas fa-exclamation-circle me-2"></i>Hard Tier Clients</h5>
+                    </div>
+                    <div class="card-body">
+                        {% for client_id, client in clients.items() %}
+                            {% if client.complexity_tier == 'Hard' %}
+                            <div class="d-flex justify-content-between align-items-center mb-3 p-3 bg-light rounded">
+                                <div>
+                                    <strong>{{ client.name }}</strong><br>
+                                    <small class="text-muted">{{ client.email }}</small><br>
+                                    <small class="text-muted">Uploaded: {{ client.upload_date }}</small>
+                                </div>
+                                <div class="text-end">
+                                    <span class="badge bg-danger mb-1">{{ client.status }}</span><br>
+                                    <small class="text-muted">{{ client.estimated_completion }}</small><br>
+                                    <a href="/client/{{ client_id }}" class="btn btn-sm btn-outline-primary mt-1">View</a>
+                                </div>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

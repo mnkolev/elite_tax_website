@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Document Upload - Elite Tax & Finance</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .upload-zone {
+            border: 2px dashed #007bff;
+            border-radius: 10px;
+            padding: 40px;
+            text-align: center;
+            background-color: #f8f9fa;
+            transition: all 0.3s ease;
+        }
+        .upload-zone.dragover {
+            border-color: #28a745;
+            background-color: #d4edda;
+        }
+        .document-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .classification-result {
+            background-color: #e7f3ff;
+            border: 1px solid #b3d9ff;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .confidence-high { color: #28a745; }
+        .confidence-medium { color: #ffc107; }
+        .confidence-low { color: #dc3545; }
+        .document-status {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        .status-uploaded { background-color: #d4edda; color: #155724; }
+        .status-na { background-color: #fff3cd; color: #856404; }
+        .status-missing { background-color: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h1 class="mb-4">
+            <i class="fas fa-brain me-2"></i>
+            Smart Document Upload System
+        </h1>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-upload me-2"></i>
+                            Upload Documents
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <form id="smartUploadForm" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label class="form-label">Client ID</label>
+                                <input type="text" class="form-control" id="clientId" value="CLIENT_001" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Client Name</label>
+                                <input type="text" class="form-control" id="clientName" value="John Smith" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Complexity Tier</label>
+                                <select class="form-select" id="complexityTier" required>
+                                    <option value="Easy">Easy (90% Automated)</option>
+                                    <option value="Medium" selected>Medium (70% Automated)</option>
+                                    <option value="Hard">Hard (30% Automated)</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Tax Year</label>
+                                <input type="number" class="form-control" id="taxYear" value="2024" required>
+                            </div>
+                            
+                            <div class="upload-zone" id="uploadZone">
+                                <i class="fas fa-cloud-upload-alt fa-3x text-primary mb-3"></i>
+                                <h5>Drag & Drop Documents Here</h5>
+                                <p class="text-muted">AI will automatically classify and organize them</p>
+                                <input type="file" id="fileInput" multiple accept=".pdf,.jpg,.jpeg,.png,.tiff" style="display: none;">
+                                <button type="button" class="btn btn-primary" onclick="document.getElementById('fileInput').click()">
+                                    Choose Files
+                                </button>
+                            </div>
+                            
+                            <div id="fileList" class="mt-3"></div>
+                            
+                            <button type="submit" class="btn btn-success mt-3" id="uploadBtn" disabled>
+                                <i class="fas fa-upload me-2"></i>
+                                Smart Upload
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-robot me-2"></i>
+                            AI Classification Results
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="classificationResults">
+                            <p class="text-muted">Upload documents to see AI classification results.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card mt-3">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-folder-tree me-2"></i>
+                            Document Organization
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="organizationResults">
+                            <p class="text-muted">Documents will be organized automatically.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Document Requirements Section -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-list-check me-2"></i>
+                            Document Requirements & Status
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="documentRequirements">
+                            <p class="text-muted">Upload documents to see requirements and status.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let selectedFiles = [];
+        
+        // File input handling
+        document.getElementById('fileInput').addEventListener('change', handleFileSelect);
+        
+        // Drag and drop handling
+        const uploadZone = document.getElementById('uploadZone');
+        uploadZone.addEventListener('dragover', handleDragOver);
+        uploadZone.addEventListener('dragleave', handleDragLeave);
+        uploadZone.addEventListener('drop', handleDrop);
+        
+        // Form submission
+        document.getElementById('smartUploadForm').addEventListener('submit', handleSmartUpload);
+        
+        function handleFileSelect(event) {
+            const files = Array.from(event.target.files);
+            addFiles(files);
+        }
+        
+        function handleDragOver(event) {
+            event.preventDefault();
+            uploadZone.classList.add('dragover');
+        }
+        
+        function handleDragLeave(event) {
+            event.preventDefault();
+            uploadZone.classList.remove('dragover');
+        }
+        
+        function handleDrop(event) {
+            event.preventDefault();
+            uploadZone.classList.remove('dragover');
+            const files = Array.from(event.dataTransfer.files);
+            addFiles(files);
+        }
+        
+        function addFiles(files) {
+            selectedFiles = [...selectedFiles, ...files];
+            updateFileList();
+            updateUploadButton();
+        }
+        
+        function updateFileList() {
+            const fileList = document.getElementById('fileList');
+            fileList.innerHTML = '';
+            
+            selectedFiles.forEach((file, index) => {
+                const fileItem = document.createElement('div');
+                fileItem.className = 'document-item';
+                fileItem.innerHTML = `
+                    <div class="flex-grow-1">
+                        <i class="fas fa-file-pdf me-2"></i>
+                        <strong>${file.name}</strong>
+                        <small class="text-muted ms-2">(${formatFileSize(file.size)})</small>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-outline-danger" onclick="removeFile(${index})">
+                        <i class="fas fa-times"></i>
+                    </button>
+                `;
+                fileList.appendChild(fileItem);
+            });
+        }
+        
+        function removeFile(index) {
+            selectedFiles.splice(index, 1);
+            updateFileList();
+            updateUploadButton();
+        }
+        
+        function updateUploadButton() {
+            const uploadBtn = document.getElementById('uploadBtn');
+            uploadBtn.disabled = selectedFiles.length === 0;
+        }
+        
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+        
+        async function handleSmartUpload(event) {
+            event.preventDefault();
+            
+            const clientId = document.getElementById('clientId').value;
+            const clientName = document.getElementById('clientName').value;
+            const complexityTier = document.getElementById('complexityTier').value;
+            const taxYear = document.getElementById('taxYear').value;
+            
+            if (selectedFiles.length === 0) {
+                alert('Please select files to upload');
+                return;
+            }
+            
+            // Show processing status
+            showProcessingStatus('Processing documents with AI...');
+            
+            // Prepare form data
+            const formData = new FormData();
+            formData.append('client_id', clientId);
+            formData.append('client_name', clientName);
+            formData.append('complexity_tier', complexityTier);
+            formData.append('tax_year', taxYear);
+            
+            selectedFiles.forEach(file => {
+                formData.append('documents', file);
+            });
+            
+            try {
+                const response = await fetch('/api/smart-upload', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showProcessingStatus('Documents processed successfully!', 'success');
+                    displayClassificationResults(result.results.classification_results);
+                    displayOrganizationResults(result.results.upload_results);
+                    displayDocumentRequirements(result.results.required_documents);
+                } else {
+                    showProcessingStatus(`Error: ${result.error}`, 'error');
+                }
+                
+            } catch (error) {
+                console.error('Upload error:', error);
+                showProcessingStatus(`Upload failed: ${error.message}`, 'error');
+            }
+        }
+        
+        function showProcessingStatus(message, type = 'info') {
+            const statusDiv = document.getElementById('classificationResults');
+            const iconClass = type === 'success' ? 'fa-check-circle' : 
+                             type === 'error' ? 'fa-times-circle' : 'fa-info-circle';
+            const textClass = type === 'success' ? 'text-success' : 
+                             type === 'error' ? 'text-danger' : 'text-info';
+            
+            statusDiv.innerHTML = `
+                <div class="text-center">
+                    <i class="fas ${iconClass} fa-2x ${textClass} mb-2"></i>
+                    <p class="${textClass}">${message}</p>
+                </div>
+            `;
+        }
+        
+        function displayClassificationResults(results) {
+            const resultsDiv = document.getElementById('classificationResults');
+            
+            if (results.length === 0) {
+                resultsDiv.innerHTML = '<p class="text-muted">No classification results.</p>';
+                return;
+            }
+            
+            let html = '<h6>AI Classification Results:</h6>';
+            
+            results.forEach(result => {
+                const confidenceClass = result.confidence === 'high' ? 'confidence-high' : 
+                                      result.confidence === 'medium' ? 'confidence-medium' : 'confidence-low';
+                
+                html += `
+                    <div class="classification-result">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>${result.filename}</strong><br>
+                                <small class="text-muted">Classified as: <span class="${confidenceClass}">${result.classified_as}</span></small>
+                            </div>
+                            <div>
+                                <span class="badge bg-${result.confidence === 'high' ? 'success' : result.confidence === 'medium' ? 'warning' : 'danger'}">
+                                    ${result.confidence} confidence
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            resultsDiv.innerHTML = html;
+        }
+        
+        function displayOrganizationResults(results) {
+            const resultsDiv = document.getElementById('organizationResults');
+            
+            if (results.length === 0) {
+                resultsDiv.innerHTML = '<p class="text-muted">No organization results.</p>';
+                return;
+            }
+            
+            let html = '<h6>Document Organization:</h6>';
+            
+            results.forEach(result => {
+                html += `
+                    <div class="document-item">
+                        <div>
+                            <i class="fas fa-file-pdf me-2"></i>
+                            <strong>${result.filename}</strong><br>
+                            <small class="text-muted">→ ${result.target_folder}</small>
+                        </div>
+                        <div>
+                            <span class="badge bg-${result.upload_success ? 'success' : 'danger'}">
+                                ${result.upload_success ? 'Success' : 'Failed'}
+                            </span>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            resultsDiv.innerHTML = html;
+        }
+        
+        function displayDocumentRequirements(requirements) {
+            const requirementsDiv = document.getElementById('documentRequirements');
+            
+            if (!requirements || requirements.error) {
+                requirementsDiv.innerHTML = '<p class="text-muted">No requirements data available.</p>';
+                return;
+            }
+            
+            let html = `
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h5 class="text-success">${requirements.summary.uploaded}</h5>
+                                <p class="text-muted">Uploaded</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h5 class="text-warning">${requirements.summary.na}</h5>
+                                <p class="text-muted">N/A</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h5 class="text-danger">${requirements.summary.missing}</h5>
+                                <p class="text-muted">Missing</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h5 class="text-primary">${requirements.summary.total_required}</h5>
+                                <p class="text-muted">Total Required</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <h6>Document Status:</h6>
+            `;
+            
+            for (const [docType, docInfo] of Object.entries(requirements.documents)) {
+                const statusClass = docInfo.status === 'uploaded' ? 'status-uploaded' :
+                                  docInfo.status === 'na' ? 'status-na' : 'status-missing';
+                
+                html += `
+                    <div class="d-flex justify-content-between align-items-center mb-2 p-2 bg-light rounded">
+                        <div>
+                            <strong>${docType}</strong>
+                            ${docInfo.required ? '<span class="badge bg-primary ms-2">Required</span>' : ''}
+                        </div>
+                        <div>
+                            <span class="document-status ${statusClass}">${docInfo.status.toUpperCase()}</span>
+                            ${docInfo.status === 'missing' && docInfo.required ? 
+                                `<button class="btn btn-sm btn-outline-warning ms-2" onclick="markAsNA('${requirements.client_id}', '${docType}', ${requirements.tax_year})">
+                                    Mark N/A
+                                </button>` : ''}
+                        </div>
+                    </div>
+                `;
+            }
+            
+            requirementsDiv.innerHTML = html;
+        }
+        
+        async function markAsNA(clientId, documentType, taxYear) {
+            try {
+                const response = await fetch('/api/mark-document-na', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        client_id: clientId,
+                        document_type: documentType,
+                        tax_year: taxYear,
+                        reason: 'Not applicable this year'
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    alert(`${documentType} marked as N/A for ${taxYear}`);
+                    // Refresh the requirements display
+                    loadClientDocuments(clientId, taxYear);
+                } else {
+                    alert(`Error: ${result.error}`);
+                }
+                
+            } catch (error) {
+                console.error('Error marking document N/A:', error);
+                alert('Failed to mark document as N/A');
+            }
+        }
+        
+        async function loadClientDocuments(clientId, taxYear) {
+            try {
+                const response = await fetch(`/api/client-documents/${clientId}?tax_year=${taxYear}`);
+                const result = await response.json();
+                
+                if (result.success) {
+                    displayDocumentRequirements(result.required_documents);
+                }
+                
+            } catch (error) {
+                console.error('Error loading client documents:', error);
+            }
+        }
+    </script>
+</body>
+</html>
+

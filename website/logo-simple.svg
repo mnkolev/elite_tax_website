@@ -1,0 +1,54 @@
+<svg width="220" height="60" viewBox="0 0 220 60" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="flashyGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#8b5cf6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="iconGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#764ba2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f093fb;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="shadow">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background glow effect -->
+  <circle cx="35" cy="30" r="28" fill="url(#iconGradient)" opacity="0.2" filter="url(#glow)"/>
+  
+  <!-- Modern icon - Stylized E with flashy styling -->
+  <g transform="translate(7, 7)">
+    <!-- E shape with modern styling and shadow -->
+    <rect x="0" y="0" width="50" height="50" rx="12" fill="url(#iconGradient)" filter="url(#shadow)"/>
+    
+    <!-- E letter design with gradient -->
+    <rect x="10" y="10" width="30" height="5" rx="2.5" fill="#ffffff"/>
+    <rect x="10" y="22.5" width="20" height="5" rx="2.5" fill="#ffffff"/>
+    <rect x="10" y="35" width="30" height="5" rx="2.5" fill="#ffffff"/>
+    
+    <!-- Dollar sign accent with glow -->
+    <circle cx="40" cy="15" r="8" fill="#ffffff" opacity="0.3"/>
+    <text x="40" y="20" font-family="Arial, sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="url(#flashyGradient)">$</text>
+    
+    <!-- Sparkle effects -->
+    <circle cx="45" cy="8" r="1.5" fill="#ffffff" opacity="0.8"/>
+    <circle cx="8" cy="45" r="1" fill="#ffffff" opacity="0.6"/>
+    <circle cx="42" cy="42" r="1.2" fill="#ffffff" opacity="0.7"/>
+  </g>
+  
+  <!-- Company name with flashy gradient -->
+  <text x="75" y="25" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="800" fill="url(#flashyGradient)" filter="url(#shadow)">Elite Tax</text>
+  <text x="75" y="42" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="600" fill="#64748b">&amp; Finance</text>
+  
+  <!-- Accent line -->
+  <rect x="75" y="28" width="60" height="2" rx="1" fill="url(#flashyGradient)" opacity="0.6"/>
+</svg>
