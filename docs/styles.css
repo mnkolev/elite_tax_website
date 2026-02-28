@@ -47,7 +47,7 @@ body {
 }
 
 .nav-logo h2 {
-    color: #2563eb;
+    color: #059669;
     font-weight: 700;
     font-size: 1.5rem;
 }
@@ -90,7 +90,7 @@ body {
 }
 
 .navbar.scrolled .nav-link:hover {
-    color: #2563eb;
+    color: #059669;
 }
 
 .nav-link::after {
@@ -105,7 +105,7 @@ body {
 }
 
 .navbar.scrolled .nav-link::after {
-    background-color: #2563eb;
+    background-color: #059669;
 }
 
 .nav-link:hover::after {
@@ -121,18 +121,14 @@ body {
 .bar {
     width: 25px;
     height: 3px;
-    background-color: #fff;
+    background-color: #334155;
     margin: 3px 0;
     transition: 0.3s;
 }
 
-.navbar.scrolled .bar {
-    background-color: #334155;
-}
-
 /* Hero Section */
 .hero {
-    background: linear-gradient(135deg, #1e40af 0%, #2563eb 50%, #3b82f6 100%);
+    background: linear-gradient(135deg, #065f46 0%, #059669 50%, #10b981 100%);
     color: white;
     padding: 120px 0 80px;
     min-height: 100vh;
@@ -253,7 +249,7 @@ body {
 
 .btn-primary {
     background-color: #fff;
-    color: #2563eb;
+    color: #059669;
 }
 
 .btn-primary:hover {
@@ -270,7 +266,7 @@ body {
 
 .btn-secondary:hover {
     background-color: #fff;
-    color: #2563eb;
+    color: #059669;
     transform: translateY(-2px);
 }
 
@@ -345,7 +341,7 @@ body {
 .metric-icon {
     width: 40px;
     height: 40px;
-    background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+    background: linear-gradient(135deg, #065f46 0%, #10b981 100%);
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -408,7 +404,7 @@ body {
 
 .bar {
     flex: 1;
-    background: linear-gradient(to top, #1e40af, #3b82f6);
+    background: linear-gradient(to top, #065f46, #10b981);
     border-radius: 4px 4px 0 0;
     animation: barGrow 2s ease-out;
     min-height: 20px;
@@ -559,7 +555,7 @@ body {
     padding: 2rem;
     border-radius: 12px;
     margin: 2rem 0;
-    border-left: 4px solid #2563eb;
+    border-left: 4px solid #059669;
 }
 
 .experience-placeholder p {
@@ -590,7 +586,7 @@ body {
 
 .feature i {
     font-size: 2.5rem;
-    color: #2563eb;
+    color: #059669;
     margin-bottom: 1rem;
 }
 
@@ -626,8 +622,8 @@ body {
     right: 0;
     bottom: 0;
     background-image: 
-        radial-gradient(circle at 10% 20%, rgba(37, 99, 235, 0.05) 0%, transparent 50%),
-        radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.05) 0%, transparent 50%);
+        radial-gradient(circle at 10% 20%, rgba(5, 150, 105, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 50%);
     pointer-events: none;
 }
 
@@ -652,14 +648,14 @@ body {
 
 .service-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 16px 32px rgba(37, 99, 235, 0.1);
-    border-top-color: #2563eb;
+    box-shadow: 0 16px 32px rgba(5, 150, 105, 0.1);
+    border-top-color: #059669;
 }
 
 .service-icon {
     width: 72px;
     height: 72px;
-    background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+    background: linear-gradient(135deg, #065f46 0%, #10b981 100%);
     border-radius: 16px;
     display: flex;
     align-items: center;
@@ -716,7 +712,7 @@ body {
 
 .contact-item i {
     font-size: 1.5rem;
-    color: #2563eb;
+    color: #059669;
     margin-top: 0.25rem;
 }
 
@@ -766,8 +762,8 @@ body {
 .form-group select:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: #2563eb;
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    border-color: #059669;
+    box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
 }
 
 .form-group textarea {
@@ -777,7 +773,7 @@ body {
 
 /* Footer */
 .footer {
-    background: #1e293b;
+    background: #1a2e2a;
     color: white;
     padding: 3rem 0 1rem;
 }
@@ -815,7 +811,7 @@ body {
 }
 
 .footer-section ul li a:hover {
-    color: #2563eb;
+    color: #10b981;
 }
 
 .footer-section p a,
@@ -827,7 +823,7 @@ body {
 
 .footer-section p a:hover,
 .contact-item p a:hover {
-    color: #2563eb;
+    color: #059669;
 }
 
 .footer-bottom {
@@ -876,10 +872,6 @@ body {
     }
 
     .bar {
-        background-color: #fff;
-    }
-
-    .navbar.scrolled .bar {
         background-color: #334155;
     }
 
@@ -997,7 +989,7 @@ html {
 
 /* About Page Styles */
 .page-hero {
-    background: linear-gradient(135deg, #1e40af 0%, #2563eb 50%, #3b82f6 100%);
+    background: linear-gradient(135deg, #065f46 0%, #059669 50%, #10b981 100%);
     color: white;
     padding: 120px 0 80px;
     text-align: center;
@@ -1042,12 +1034,12 @@ html {
     padding: 1rem 1.5rem;
     border-radius: 12px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    border-left: 4px solid #2563eb;
+    border-left: 4px solid #059669;
 }
 
 .experience-badge i {
     font-size: 1.5rem;
-    color: #2563eb;
+    color: #059669;
 }
 
 .experience-badge span {
@@ -1065,7 +1057,7 @@ html {
 .about-text-content .lead {
     font-size: 1.25rem;
     font-weight: 500;
-    color: #2563eb;
+    color: #059669;
     margin-bottom: 2rem;
     line-height: 1.6;
 }
@@ -1079,7 +1071,7 @@ html {
 
 .about-text-content blockquote {
     background: #f1f5f9;
-    border-left: 4px solid #2563eb;
+    border-left: 4px solid #059669;
     padding: 1.5rem 2rem;
     margin: 2rem 0;
     border-radius: 8px;
@@ -1131,7 +1123,7 @@ html {
 
 .ceo-title {
     font-weight: 600;
-    color: #2563eb !important;
+    color: #059669 !important;
     font-size: 1rem;
 }
 
@@ -1160,7 +1152,7 @@ html {
 
 .credential-item i {
     font-size: 1.25rem;
-    color: #2563eb;
+    color: #059669;
     margin-top: 0.25rem;
 }
 
@@ -1178,7 +1170,7 @@ html {
 }
 
 .cta-card {
-    background: linear-gradient(135deg, #1e40af 0%, #2563eb 100%);
+    background: linear-gradient(135deg, #065f46 0%, #059669 100%);
     color: white;
     text-align: center;
 }
@@ -1194,7 +1186,7 @@ html {
 
 .cta-card .btn {
     background: white;
-    color: #2563eb;
+    color: #059669;
 }
 
 .cta-card .btn:hover {
@@ -1230,7 +1222,7 @@ html {
 .value-icon {
     width: 72px;
     height: 72px;
-    background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+    background: linear-gradient(135deg, #065f46 0%, #10b981 100%);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -1262,7 +1254,7 @@ html {
 }
 
 .navbar.scrolled .nav-link.active {
-    color: #2563eb;
+    color: #059669;
 }
 
 .nav-link.active::after {
@@ -1290,7 +1282,7 @@ html {
     height: 20px;
     margin: -10px 0 0 -10px;
     border: 2px solid #f3f3f3;
-    border-top: 2px solid #2563eb;
+    border-top: 2px solid #059669;
     border-radius: 50%;
     animation: spin 1s linear infinite;
 }
