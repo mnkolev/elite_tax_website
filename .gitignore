@@ -30,5 +30,8 @@ venv/
 *.log
 tunnel.log
 
-# Optional: backup files from restores
-# *.restored-by-ai-backup
+# Old website folder (site now lives in docs/)
+website/
+
+# Backup files from restores
+*.restored-by-ai-backup
