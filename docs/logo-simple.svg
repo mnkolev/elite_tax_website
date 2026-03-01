@@ -1,54 +1,42 @@
-<svg width="220" height="60" viewBox="0 0 220 60" xmlns="http://www.w3.org/2000/svg">
+<svg width="240" height="56" viewBox="0 0 240 56" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="flashyGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
-      <stop offset="50%" style="stop-color:#8b5cf6;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e3a5f"/>
+      <stop offset="100%" style="stop-color:#2d5a87"/>
     </linearGradient>
-    <linearGradient id="iconGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
-      <stop offset="50%" style="stop-color:#764ba2;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#f093fb;stop-opacity:1" />
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#e0c36a"/>
+      <stop offset="100%" style="stop-color:#c9a84c"/>
     </linearGradient>
-    <filter id="glow">
-      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-      <feMerge> 
-        <feMergeNode in="coloredBlur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-    <filter id="shadow">
-      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.3"/>
-    </filter>
   </defs>
-  
-  <!-- Background glow effect -->
-  <circle cx="35" cy="30" r="28" fill="url(#iconGradient)" opacity="0.2" filter="url(#glow)"/>
-  
-  <!-- Modern icon - Stylized E with flashy styling -->
-  <g transform="translate(7, 7)">
-    <!-- E shape with modern styling and shadow -->
-    <rect x="0" y="0" width="50" height="50" rx="12" fill="url(#iconGradient)" filter="url(#shadow)"/>
-    
-    <!-- E letter design with gradient -->
-    <rect x="10" y="10" width="30" height="5" rx="2.5" fill="#ffffff"/>
-    <rect x="10" y="22.5" width="20" height="5" rx="2.5" fill="#ffffff"/>
-    <rect x="10" y="35" width="30" height="5" rx="2.5" fill="#ffffff"/>
-    
-    <!-- Dollar sign accent with glow -->
-    <circle cx="40" cy="15" r="8" fill="#ffffff" opacity="0.3"/>
-    <text x="40" y="20" font-family="Arial, sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="url(#flashyGradient)">$</text>
-    
-    <!-- Sparkle effects -->
-    <circle cx="45" cy="8" r="1.5" fill="#ffffff" opacity="0.8"/>
-    <circle cx="8" cy="45" r="1" fill="#ffffff" opacity="0.6"/>
-    <circle cx="42" cy="42" r="1.2" fill="#ffffff" opacity="0.7"/>
-  </g>
-  
-  <!-- Company name with flashy gradient -->
-  <text x="75" y="25" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="800" fill="url(#flashyGradient)" filter="url(#shadow)">Elite Tax</text>
-  <text x="75" y="42" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="600" fill="#64748b">&amp; Finance</text>
-  
-  <!-- Accent line -->
-  <rect x="75" y="28" width="60" height="2" rx="1" fill="url(#flashyGradient)" opacity="0.6"/>
+
+  <!-- Shield mark — softer curves -->
+  <path d="M28 5 C28 5 46 12 47 13 Q48 13.5 48 14.5 L48 28
+           C48 39 39 47 28 51.5 C17 47 8 39 8 28 L8 14.5
+           Q8 13.5 9 13 C10 12 28 5 28 5 Z"
+        fill="url(#shieldGrad)"/>
+
+  <!-- Soft inner border -->
+  <path d="M28 10 C28 10 42 16 42.5 16.5 Q43 17 43 17.5 L43 28
+           C43 37 36.5 43.5 28 47 C19.5 43.5 13 37 13 28 L13 17.5
+           Q13 17 13.5 16.5 C14 16 28 10 28 10 Z"
+        fill="none" stroke="url(#goldGrad)" stroke-width="0.8" opacity="0.5"/>
+
+  <!-- Elegant E — serif-style text glyph -->
+  <text x="28" y="37" font-family="Georgia, 'Times New Roman', serif"
+        font-size="28" font-weight="400" fill="url(#goldGrad)"
+        text-anchor="middle" letter-spacing="-0.5">E</text>
+
+  <!-- Company name — lighter weight for softness -->
+  <text x="62" y="26" font-family="Inter, -apple-system, sans-serif"
+        font-size="21" font-weight="600" fill="#1e3a5f"
+        letter-spacing="0.2">Elite Tax</text>
+
+  <text x="62" y="45" font-family="Inter, -apple-system, sans-serif"
+        font-size="12" font-weight="400" fill="#94a3b8"
+        letter-spacing="3">&amp; FINANCE</text>
+
+  <!-- Thinner gold accent line -->
+  <rect x="62" y="29.5" width="32" height="1.2" rx="0.6"
+        fill="url(#goldGrad)" opacity="0.5"/>
 </svg>

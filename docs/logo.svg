@@ -1,45 +1,42 @@
-<svg width="200" height="60" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
+<svg width="240" height="56" viewBox="0 0 240 56" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#2563eb;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:1" />
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e3a5f"/>
+      <stop offset="100%" style="stop-color:#2d5a87"/>
     </linearGradient>
-    <linearGradient id="iconGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#e0c36a"/>
+      <stop offset="100%" style="stop-color:#c9a84c"/>
     </linearGradient>
   </defs>
-  
-  <!-- Background circle for icon -->
-  <circle cx="30" cy="30" r="25" fill="url(#iconGradient)" opacity="0.1"/>
-  
-  <!-- Main icon - Calculator/Finance symbol -->
-  <g transform="translate(15, 15)">
-    <!-- Calculator body -->
-    <rect x="0" y="0" width="30" height="40" rx="4" fill="url(#iconGradient)"/>
-    
-    <!-- Calculator screen -->
-    <rect x="3" y="3" width="24" height="8" rx="2" fill="#ffffff" opacity="0.9"/>
-    
-    <!-- Calculator buttons -->
-    <circle cx="8" cy="18" r="2" fill="#ffffff" opacity="0.8"/>
-    <circle cx="15" cy="18" r="2" fill="#ffffff" opacity="0.8"/>
-    <circle cx="22" cy="18" r="2" fill="#ffffff" opacity="0.8"/>
-    
-    <circle cx="8" cy="25" r="2" fill="#ffffff" opacity="0.8"/>
-    <circle cx="15" cy="25" r="2" fill="#ffffff" opacity="0.8"/>
-    <circle cx="22" cy="25" r="2" fill="#ffffff" opacity="0.8"/>
-    
-    <circle cx="8" cy="32" r="2" fill="#ffffff" opacity="0.8"/>
-    <circle cx="15" cy="32" r="2" fill="#ffffff" opacity="0.8"/>
-    <circle cx="22" cy="32" r="2" fill="#ffffff" opacity="0.8"/>
-    
-    <!-- Dollar sign overlay -->
-    <text x="15" y="7" font-family="Arial, sans-serif" font-size="6" font-weight="bold" text-anchor="middle" fill="#2563eb">$</text>
-  </g>
-  
-  <!-- Company name -->
-  <text x="70" y="25" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700" fill="url(#logoGradient)">Elite Tax</text>
-  <text x="70" y="45" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="500" fill="#64748b">&amp; Finance</text>
-</svg>
 
+  <!-- Shield mark — softer curves -->
+  <path d="M28 5 C28 5 46 12 47 13 Q48 13.5 48 14.5 L48 28
+           C48 39 39 47 28 51.5 C17 47 8 39 8 28 L8 14.5
+           Q8 13.5 9 13 C10 12 28 5 28 5 Z"
+        fill="url(#shieldGrad)"/>
+
+  <!-- Soft inner border -->
+  <path d="M28 10 C28 10 42 16 42.5 16.5 Q43 17 43 17.5 L43 28
+           C43 37 36.5 43.5 28 47 C19.5 43.5 13 37 13 28 L13 17.5
+           Q13 17 13.5 16.5 C14 16 28 10 28 10 Z"
+        fill="none" stroke="url(#goldGrad)" stroke-width="0.8" opacity="0.5"/>
+
+  <!-- Elegant E — serif-style text glyph -->
+  <text x="28" y="37" font-family="Georgia, 'Times New Roman', serif"
+        font-size="28" font-weight="400" fill="url(#goldGrad)"
+        text-anchor="middle" letter-spacing="-0.5">E</text>
+
+  <!-- Company name — lighter weight for softness -->
+  <text x="62" y="26" font-family="Inter, -apple-system, sans-serif"
+        font-size="21" font-weight="600" fill="#1e3a5f"
+        letter-spacing="0.2">Elite Tax</text>
+
+  <text x="62" y="45" font-family="Inter, -apple-system, sans-serif"
+        font-size="12" font-weight="400" fill="#94a3b8"
+        letter-spacing="3">&amp; FINANCE</text>
+
+  <!-- Thinner gold accent line -->
+  <rect x="62" y="29.5" width="32" height="1.2" rx="0.6"
+        fill="url(#goldGrad)" opacity="0.5"/>
+</svg>

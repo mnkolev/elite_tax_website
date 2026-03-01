@@ -160,31 +160,59 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Intersection Observer for animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
+// Animated number counter
+function animateCounter(el) {
+    const target = el.getAttribute('data-count');
+    if (!target) return;
 
-const observer = new IntersectionObserver((entries) => {
+    const formats = {
+        '2500+':  { end: 2500, render: v => Math.floor(v).toLocaleString() + '+' },
+        '4.9/5':  { end: 4.9,  render: v => v.toFixed(1) + '/5' },
+        '24hr':   { end: 24,   render: v => Math.floor(v) + 'hr' },
+        '$2.3M+': { end: 2.3,  render: v => '$' + v.toFixed(1) + 'M+' },
+    };
+
+    const fmt = formats[target];
+    if (!fmt) { el.textContent = target; return; }
+
+    const duration = 2000;
+    const start = performance.now();
+
+    function tick(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = fmt.render(fmt.end * eased);
+        if (progress < 1) requestAnimationFrame(tick);
+    }
+
+    requestAnimationFrame(tick);
+}
+
+// Intersection Observer for scroll animations + counters
+const fadeObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
+            entry.target.classList.add('visible');
+
+            if (entry.target.hasAttribute('data-count')) {
+                animateCounter(entry.target);
+                fadeObserver.unobserve(entry.target);
+            }
         }
     });
-}, observerOptions);
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-// Observe elements for animation
 document.addEventListener('DOMContentLoaded', () => {
-    const animateElements = document.querySelectorAll('.service-card, .feature, .contact-item');
-    
-    animateElements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(el);
+    const animateElements = document.querySelectorAll(
+        '.service-card, .feature, .contact-item, .value-card, .section-header, .about-content, .contact-form, .trust-item'
+    );
+    animateElements.forEach((el, i) => {
+        el.classList.add('fade-in');
+        el.style.transitionDelay = `${i % 5 * 0.1}s`;
+        fadeObserver.observe(el);
     });
+
+    document.querySelectorAll('[data-count]').forEach(el => fadeObserver.observe(el));
 });
 
 // Form validation
